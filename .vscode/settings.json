@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "name": "Local instance wampmysqld64",
+      "driver": "MySQL",
+      "server": "localhost",
+      "port": 3306,
+      "database": "mysql",
+      "username": "root",
+      "password": "",
+      "previewLimit": 50
+    }
+  ]
+}
