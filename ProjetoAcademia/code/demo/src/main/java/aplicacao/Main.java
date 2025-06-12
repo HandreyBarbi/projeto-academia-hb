@@ -17,7 +17,7 @@ public class Main {
 
     /*
      * Esse ponto vocês começam a desenvolver o código de vocês.
-     * Façam os métodos dentro da classe Main, que serão chamados para fazer o menu inicial, tela de alunos e tela de treinos.
+     * Façam os métodos dentro da classe Main, que serão chamados para fazer o menu inicial, tela de alunos e tela de treino.
      * Vocês podem criar outros métodos para organizar o código, mas não esqueçam de manter a lógica dentro da classe Main.
      * ASS: Gustavo
      */
@@ -49,7 +49,7 @@ public class Main {
             System.out.println(" |--------------------|");
             System.out.println("Escolha uma das opções:");
             System.out.println(" [1] Alunos");
-            System.out.println(" [2] Treinos");
+            System.out.println(" [2] Treino");
             System.out.println(" [3] Sair");
             choose = scanner.nextInt();
             scanner.nextLine();
@@ -123,7 +123,7 @@ public class Main {
         int choose;
 
         /*Cadastrar um treino para um aluno (tipo de treino, descrição, duração, data de início).
-        Listar todos os treinos de um aluno específico.
+        Listar todos os treino de um aluno específico.
         Editar informações de um treino.
         Excluir um treino.
          * Método para cadastrar um novo aluno.
@@ -132,13 +132,13 @@ public class Main {
          */
         do {
             System.out.println(" |---------------------|");
-            System.out.println(" |------ Treinos ------|");
+            System.out.println(" |---- Menu Treino ----|");
             System.out.println(" |---------------------|");
             System.out.println("Escolha uma das opções:");
-            System.out.println(" [1] Cadastrar treino");
-            System.out.println(" [2] Listar treinos");
-            System.out.println(" [3] Atualizar informações cadastrais");
-            System.out.println(" [4] Excluir treino");
+            System.out.println(" [1] Cadastrar Treino");
+            System.out.println(" [2] Listar Treinos");
+            System.out.println(" [3] Atualizar informações de Treinos");
+            System.out.println(" [4] Excluir Treino");
             System.out.println(" [5] Voltar");
             choose = scanner.nextInt();
             scanner.nextLine();
@@ -169,7 +169,7 @@ public class Main {
 
     public static void cadastrarAluno(Connection connection) {
         Aluno aluno = criarNovoAluno();
-        AlunoDAO alunoDAO = new AlunoDAO();
+        AlunoDAO alunoDAO = new AlunoDAO("", "", new java.sql.Date(System.currentTimeMillis()), "", "");
         try {
             alunoDAO.cadastrar(connection, aluno);
             System.out.println(">> Aluno cadastrado com sucesso!");
@@ -179,7 +179,7 @@ public class Main {
     }
 
     public static void listarAluno(Connection connection) {
-    AlunoDAO alunoDAO = new AlunoDAO();
+    AlunoDAO alunoDAO = new AlunoDAO("", "", new java.util.Date(), "", "");
     try {
         var alunos = alunoDAO.listar(connection);
         if (alunos.isEmpty()) {
@@ -196,7 +196,7 @@ public class Main {
 
     public static void editarAluno(Connection connection) {
     Scanner scanner = Main.scanner; // Usa o scanner já existente
-    AlunoDAO alunoDAO = new AlunoDAO();
+    AlunoDAO alunoDAO = new AlunoDAO("", "", new java.sql.Date(System.currentTimeMillis()), "", "");
 
     System.out.print(" Digite o ID do aluno que deseja editar: ");
     int id = scanner.nextInt();
@@ -241,7 +241,7 @@ public static void excluirAluno(Connection connection) {
     int id = scanner.nextInt();
     scanner.nextLine();
 
-    AlunoDAO alunoDAO = new AlunoDAO();
+    AlunoDAO alunoDAO = new AlunoDAO("", "", new java.sql.Date(System.currentTimeMillis()), "", "");
     Aluno aluno = new Aluno();
     aluno.setId(id);
 
@@ -318,7 +318,7 @@ public static void excluirAluno(Connection connection) {
 
     TreinoDAO treinoDAO = new TreinoDAO(connection);
     Treino treino = new Treino();
-    treino.setIdTreino(idtreino);
+   
 
     try{
         treinoDAO.deletar(idtreino); 
@@ -332,20 +332,20 @@ public static void excluirAluno(Connection connection) {
     public static void listarTreino(Connection connection) {
     TreinoDAO treinoDAO = new TreinoDAO(connection);
     try {
-        List<Treino> treinos = treinoDAO.listarTodos();
-        if (treinos.isEmpty()) {
+        List<Treino> treino = treinoDAO.listarTodos();
+        if (treino.isEmpty()) {
             System.out.println(" Nenhum treino cadastrado.");
         } else {
-            for (Treino treino : treinos) {
-                System.out.println(treino);
+            for (Treino t : treino) {
+                System.out.println(t);
             }
         }
     } catch (SQLException e) {
-        System.err.println(">> Erro ao listar treinos: " + e.getMessage());
+        System.err.println(">> Erro ao listar treino: " + e.getMessage());
     }
 }
 //fim listar treino (feito por Handrey) opção 2
-
+//te odeio gustavo
 //atualizar infos cadastrais (feito por Handrey) opção 3
 public static void atualizarTreino(Connection connection) {
     Treino treino = new Treino();
@@ -385,10 +385,11 @@ public static void atualizarTreino(Connection connection) {
         System.err.println(">> Erro ao atualizar treino: " + e.getMessage());
     }
 }
+
 //fim atualizar infos cadastrais (feito por Handrey)
 
     public static void buscarAluno(Connection connection) {
-    AlunoDAO alunoDAO = new AlunoDAO();
+    AlunoDAO alunoDAO = new AlunoDAO("", "", new java.util.Date(), "", "");
     System.out.println("Buscar por:");
     System.out.println(" [1] ID");
     System.out.println(" [2] Nome");
