@@ -1,10 +1,9 @@
 package model;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 public class Treino {
-    private int idtreino;
+    private int id;
     private int aluno_id;
     private String tipo_treino;
     private String descricao;
@@ -12,10 +11,10 @@ public class Treino {
     private Date data_inicio;
 
     public int getIdTreino() {
-        return idtreino;
+        return id;
     }
-    public void setIdTreino(int idtreino) {
-        this.idtreino = idtreino;
+    public void setIdTreino(int id) {
+        this.id = id;
     }
     public int getIdAluno() {
         return aluno_id;
@@ -47,19 +46,16 @@ public class Treino {
     public void setDataInicio(Date dataInicio) {
         this.data_inicio = dataInicio;
     }
-      @Override
-    public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = (data_inicio != null) ? sdf.format(data_inicio) : "N/A";
+    //AA
+@Override
+public String toString() {
+    return 
+           "ID do Treino = " + id +
+           "\nID do Aluno = " + aluno_id +
+           "\nTipo do Treino = " + tipo_treino +
+           "\nDescrição = " + descricao +
+           "\nDuração em Minutos = " + duracao_minutos +
+           "\nData de Início = " + data_inicio +"\n";
+}
 
-        return String.format(
-            "\n Aluno ID: %d\n" +
-            "   Aluno ID: %s\n" +
-            "   Tipo do Treino: %s\n" +
-            "   Descrição: %s\n" +
-            "   Duração: %s\n" +
-            "   Data de Início: %s\n",
-            idtreino, aluno_id, tipo_treino, descricao, duracao_minutos, data_inicio
-        );
-    }
 }
