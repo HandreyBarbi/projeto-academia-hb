@@ -18,7 +18,7 @@ public class TreinoDAO {
     }
 
     public void inserir(Treino treino) throws SQLException {
-        String sql = "INSERT INTO treinos (aluno_id, tipo_treino, descricao, duracao_minutos, data_inicio) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO treino (aluno_id, tipo_treino, descricao, duracao_minutos, data_inicio) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, treino.getIdAluno());
             stmt.setString(2, treino.getTipoTreino());
@@ -30,7 +30,7 @@ public class TreinoDAO {
     }
 
     public void atualizar(Treino treino) throws SQLException {
-        String sql = "UPDATE treinos SET aluno_id=?, tipo_treino=?, descricao=?, duracao_minutos=?, data_inicio=? WHERE idtreino=?";
+        String sql = "UPDATE treino SET aluno_id=?, tipo_treino=?, descricao=?, duracao_minutos=?, data_inicio=? WHERE id=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, treino.getIdAluno());
             stmt.setString(2, treino.getTipoTreino());
@@ -42,18 +42,18 @@ public class TreinoDAO {
         }
     }
 
-    public void deletar(int idtreino) throws SQLException {
-        String sql = "DELETE FROM treinos WHERE idtreino=?";
+    public void deletar(int id) throws SQLException {
+        String sql = "DELETE FROM treino WHERE id=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idtreino);
+            stmt.setInt(1, id);
             stmt.executeUpdate();
         }
     }
 
-    public Treino buscarPorId(int idtreino) throws SQLException {
-        String sql = "SELECT * FROM treinos WHERE idtreino=?";
+    public Treino buscarPorId(int id) throws SQLException {
+        String sql = "SELECT * FROM treino WHERE id=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idtreino);
+            stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return mapearTreino(rs);
@@ -64,20 +64,23 @@ public class TreinoDAO {
     }
 
     public List<Treino> listarTodos() throws SQLException {
-        List<Treino> treinos = new ArrayList<>();
-        String sql = "SELECT * FROM treinos";
+        List<Treino> treino = new ArrayList<>();
+        String sql = "SELECT * FROM treino";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                treinos.add(mapearTreino(rs));
+                treino.add(mapearTreino(rs));
+                
             }
         }
-        return treinos;
+        
+        return treino;
     }
+    
 
     private Treino mapearTreino(ResultSet rs) throws SQLException {
         Treino treino = new Treino();
-        treino.setIdTreino(rs.getInt("idtreino"));
+        treino.setIdTreino(rs.getInt("id"));
         treino.setIdAluno(rs.getInt("aluno_id"));
         treino.setTipoTreino(rs.getString("tipo_treino"));
         treino.setDescricao(rs.getString("descricao"));
