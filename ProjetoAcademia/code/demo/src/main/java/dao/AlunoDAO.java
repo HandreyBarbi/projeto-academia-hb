@@ -2,11 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.Aluno;
@@ -24,10 +24,6 @@ public class AlunoDAO {
         this.data_nascimento = data_nascimento;
         this.telefone = telefone;
         this.email = email;
-    }
-
-    public AlunoDAO() {
-        // Construtor vazio para uso do DAO
     }
 
     public void cadastrar(Connection conn, Aluno aluno) throws SQLException {
@@ -61,7 +57,6 @@ public class AlunoDAO {
     public String getEmail() {
         return email;
     }
-    
     
     public List<Aluno> listar(Connection conn) throws SQLException {
         List<Aluno> alunos = new ArrayList<>();
