@@ -14,7 +14,7 @@ public class Conexao {
             con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/academia?useSSL=false&serverTimezone=UTC",
                 "root",
-                "password"
+                "" // Aqui você coloca sua senha do MySQL caso tiver alguma
             );
             System.out.println("Conexão realizada com sucesso!");
         } catch (SQLException | ClassNotFoundException ex) {
